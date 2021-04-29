@@ -1,0 +1,10 @@
+{
+    "manifest_version": 3,
+    "name": "Reeder Rainbow",
+    "version": "0.1",
+    "description": "who even fucking knows",
+    "background": {
+      "service_worker": "background.js"
+    },
+    "permissions": ["storage", "contextMenus"]
+}
