@@ -3,8 +3,15 @@
     "name": "Reeder Rainbow",
     "version": "0.1",
     "description": "who even fucking knows",
+    "action": {},
     "background": {
       "service_worker": "background.js"
     },
-    "permissions": ["storage", "contextMenus"]
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ],
+    "permissions": ["storage", "contextMenus", "tabs"]
 }
