@@ -20,6 +20,9 @@ function addMichael() {
 
   michaelWrapper.append(michaelImage);
   michaelWrapper.append(michaelDescription);
+
+  michaelWrapper.onClick = removeFriends;
+
   return michaelWrapper;
 }
 
@@ -28,8 +31,14 @@ const addFriend = addMichael();
 function speechBubble(keyword, text) {
   const speechBubble = document.createElement('div');
   speechBubble.setAttribute('id', 'speechBubble');
-  speechBubble.innerHTML = keyword.toUpperCase() +': '+ text;
+  speechBubble.innerHTML = keyword.toUpperCase() + ': ' + text;
+  speechBubble.onClick = removeFriends;
   return speechBubble;
+}
+
+function removeFriends() {
+  document.getElementById('speechBubble').remove();
+  document.getElementById('codesmithWrapper').remove();
 }
 
 document.onclick = function (event) {
@@ -38,9 +47,11 @@ document.onclick = function (event) {
   fetch(`https://api-portal.dictionary.com/dcom/pageData/${keyword}`)
     .then(data => data.json())
     .then(jsonData => {
+      //if (!jsonData.data.content === undefined) return;
       const michael = addMichael(jsonData.data.content[0].entries[0].posBlocks[0].definitions[0].definition);
       const speech = speechBubble(keyword, jsonData.data.content[0].entries[0].posBlocks[0].definitions[0].definition);
       event.target.append(speech);
       event.target.append(michael);
+
     });
-}
+  }
